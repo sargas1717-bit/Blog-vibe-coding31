@@ -1,0 +1,18 @@
+{% extends "_base.html" %}
+
+{% block title %}{{ post.title }} | Cuaderno{% endblock %}
+
+{% block content %}
+<article class="article-detail">
+    <a class="back-link" href="{% url 'post_list' %}">← Volver a publicaciones</a>
+    <p class="post-byline">Por <strong>{{ post.author.username }}</strong> <span>·</span> {{ post.created_at|date:"d/m/Y H:i" }}</p>
+    <h1>{{ post.title }}</h1>
+    <div class="article-content">{{ post.content|linebreaks }}</div>
+    {% if user.is_authenticated and user == post.author %}
+        <div class="owner-actions">
+            <a class="button" href="{% url 'post_update' post.pk %}">Editar publicación</a>
+            <a class="button button-danger" href="{% url 'post_delete' post.pk %}">Eliminar publicación</a>
+        </div>
+    {% endif %}
+</article>
+{% endblock %}

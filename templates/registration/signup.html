@@ -1,0 +1,16 @@
+{% extends "_base.html" %}
+
+{% block title %}Crear cuenta | Cuaderno{% endblock %}
+
+{% block content %}
+<section class="form-page auth-page">
+    <p class="eyebrow">TU ESPACIO EMPIEZA AQUÍ</p>
+    <h1>Hazte un<br><em>Cuaderno.</em></h1>
+    <form method="post" class="post-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="button" type="submit">Crear cuenta</button>
+    </form>
+    <p class="auth-switch">¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión</a></p>
+</section>
+{% endblock %}

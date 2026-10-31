@@ -1,0 +1,38 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Un espacio para publicar y leer historias.">
+    <title>{% block title %}Cuaderno{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/site.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="{% url 'post_list' %}">Cuaderno<span>.</span></a>
+        <nav class="site-nav" aria-label="Navegación principal">
+            {% if user.is_authenticated %}
+                <a class="nav-create" href="{% url 'post_create' %}">+ Crear post</a>
+                <span class="nav-greeting">Hola, {{ user.username }}</span>
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button class="nav-logout" type="submit">Cerrar sesión</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">Iniciar sesión</a>
+                <a class="nav-create" href="{% url 'signup' %}">Crear cuenta</a>
+            {% endif %}
+        </nav>
+    </header>
+    <main class="page-shell">
+        {% if messages %}
+            <div class="messages" role="status">
+                {% for message in messages %}<p>{{ message }}</p>{% endfor %}
+            </div>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="site-footer">Un lugar para las ideas que merecen quedarse.</footer>
+</body>
+</html>

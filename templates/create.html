@@ -1,0 +1,18 @@
+{% extends "_base.html" %}
+
+{% block title %}Crear publicación | Cuaderno{% endblock %}
+
+{% block content %}
+<section class="form-page">
+    <p class="eyebrow">NUEVA HISTORIA</p>
+    <h1>Escribe algo<br><em>que importe.</em></h1>
+    <form method="post" class="post-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-actions">
+            <button class="button" type="submit">Publicar</button>
+            <a class="text-link" href="{% url 'post_list' %}">Cancelar</a>
+        </div>
+    </form>
+</section>
+{% endblock %}

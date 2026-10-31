@@ -1,0 +1,17 @@
+{% extends "_base.html" %}
+
+{% block title %}Iniciar sesión | Cuaderno{% endblock %}
+
+{% block content %}
+<section class="form-page auth-page">
+    <p class="eyebrow">QUÉ BUENO VERTE</p>
+    <h1>Vuelve a<br><em>Cuaderno.</em></h1>
+    <form method="post" class="post-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+        <button class="button" type="submit">Iniciar sesión</button>
+    </form>
+    <p class="auth-switch">¿Nuevo por aquí? <a href="{% url 'signup' %}">Crea una cuenta</a></p>
+</section>
+{% endblock %}
